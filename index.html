@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050913">
+<meta name="description" content="Eclipse Node Theta-7 v1.1.4-rc1: an offline, human-governed coherence, decision, and validation interface within the AEON-TEMPUS framework.">
+<title>Eclipse Node Theta-7 v1.1.4-rc1 | AEON-TEMPUS</title>
+<style>
+:root{
+  --void:#03050a;--night:#07101c;--panel:rgba(8,18,32,.82);--panel2:rgba(13,28,47,.72);
+  --line:rgba(150,210,255,.22);--line2:rgba(242,199,111,.3);--ice:#dff6ff;--cyan:#78d9ff;
+  --blue:#3f8cff;--gold:#efc66f;--gold2:#ffe4a7;--muted:#99adbe;--danger:#ff9b9b;
+  --ok:#8ff2c2;--shadow:0 24px 80px rgba(0,0,0,.5);--radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--void)}
+body{margin:0;color:var(--ice);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:
+radial-gradient(circle at 50% -10%,rgba(52,124,199,.22),transparent 40%),linear-gradient(180deg,#06101b 0%,#020408 68%,#05070b 100%);min-height:100vh;letter-spacing:.01em}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+::selection{background:rgba(120,217,255,.25)}
+.skip{position:fixed;left:12px;top:-70px;z-index:999;background:#fff;color:#000;padding:10px 14px;border-radius:8px}.skip:focus{top:12px}
+.hero{position:relative;min-height:94vh;display:grid;place-items:center;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(180deg,rgba(2,6,12,.18),rgba(2,5,10,.62) 65%,#050913 100%);background-size:cover;background-position:center;filter:saturate(.85) contrast(1.08)}
+.hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 79px,rgba(150,210,255,.025) 80px),repeating-linear-gradient(0deg,transparent 0 79px,rgba(150,210,255,.018) 80px);mask-image:linear-gradient(to bottom,black,transparent 90%);pointer-events:none}
+.hero-inner{position:relative;z-index:2;width:min(1100px,92vw);text-align:center;padding:10vh 0 7vh}
+.eyebrow{display:inline-flex;gap:.65rem;align-items:center;padding:.55rem .9rem;border:1px solid var(--line2);border-radius:999px;background:rgba(3,8,15,.62);backdrop-filter:blur(10px);text-transform:uppercase;letter-spacing:.18em;font-size:.7rem;color:var(--gold2)}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 18px var(--ok);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.45;transform:scale(.78)}}
+h1{margin:1.2rem 0 .45rem;font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(3rem,9vw,7.4rem);line-height:.88;letter-spacing:.05em;text-shadow:0 4px 40px rgba(0,0,0,.7)}
+h1 span{display:block;font-family:ui-sans-serif,system-ui;font-size:.19em;letter-spacing:.38em;margin:1.4rem 0 0;color:var(--gold2);font-weight:650}
+.subtitle{margin:1.2rem auto 2rem;max-width:760px;color:#d9e7ef;font-size:clamp(1rem,2vw,1.25rem);line-height:1.7;text-shadow:0 2px 14px rgba(0,0,0,.8)}
+.hero-actions{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap}
+.btn{border:1px solid var(--line);border-radius:999px;padding:.86rem 1.15rem;background:rgba(8,19,34,.78);color:var(--ice);transition:.22s ease;box-shadow:0 8px 30px rgba(0,0,0,.24)}
+.btn:hover,.btn:focus-visible{transform:translateY(-2px);border-color:rgba(120,217,255,.7);box-shadow:0 10px 34px rgba(40,140,220,.18);outline:none}
+.btn.primary{background:linear-gradient(135deg,#d9af58,#fff0ba);color:#07101a;border-color:#ffe3a0;font-weight:800}
+.btn.ghost{background:rgba(3,8,15,.42)}
+.hero-metrics{margin:3rem auto 0;display:grid;grid-template-columns:repeat(4,1fr);max-width:800px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:rgba(3,8,15,.55);backdrop-filter:blur(12px)}
+.metric{padding:1rem;border-right:1px solid var(--line)}.metric:last-child{border:0}.metric strong{display:block;color:var(--gold2);font-size:.72rem;letter-spacing:.16em}.metric span{display:block;margin-top:.35rem;color:var(--muted);font-size:.78rem}
+main{width:min(1180px,92vw);margin:auto;padding:5rem 0 8rem}
+.section-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:1rem;margin:0 0 1.5rem}
+.kicker{color:var(--gold);text-transform:uppercase;letter-spacing:.18em;font-size:.73rem;font-weight:800}
+h2{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(2rem,5vw,4.2rem);margin:.35rem 0 .25rem;letter-spacing:.02em}.lead{color:var(--muted);line-height:1.75;max-width:760px;margin:0}
+.progress-wrap{display:flex;align-items:center;gap:.8rem}.progress-ring{--p:0;width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--gold) calc(var(--p)*1%),rgba(255,255,255,.08) 0);position:relative}.progress-ring::before{content:"";position:absolute;width:52px;height:52px;border-radius:50%;background:#07101a}.progress-ring span{position:relative;font-weight:800;font-size:.82rem;color:var(--gold2)}
+.notice{display:grid;grid-template-columns:auto 1fr;gap:1rem;padding:1.1rem 1.2rem;border:1px solid var(--line2);border-radius:18px;background:linear-gradient(135deg,rgba(239,198,111,.08),rgba(7,16,28,.78));margin:1.5rem 0 3rem;line-height:1.6;color:#d8e3e9}.notice b{color:var(--gold2)}.notice-icon{font-size:1.35rem}
+.chambers{display:grid;gap:1rem}
+.chamber{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,var(--panel),rgba(5,11,21,.9));box-shadow:var(--shadow);overflow:hidden;transition:.25s ease}.chamber[data-complete="true"]{border-color:rgba(143,242,194,.55);box-shadow:0 0 0 1px rgba(143,242,194,.08),var(--shadow)}
+.chamber-head{width:100%;display:grid;grid-template-columns:64px 1fr auto 28px;align-items:center;gap:1rem;text-align:left;border:0;background:transparent;color:inherit;padding:1.2rem 1.25rem}.num{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line2);font-family:Georgia,serif;font-size:1.2rem;color:var(--gold2);background:rgba(239,198,111,.06)}.chamber-title strong{display:block;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase}.chamber-title span{display:block;color:var(--muted);font-size:.83rem;margin-top:.25rem}.state{font-size:.7rem;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}.state::before{content:"○";margin-right:.45rem}.chamber[data-complete="true"] .state{color:var(--ok)}.chamber[data-complete="true"] .state::before{content:"●"}.chev{margin-left:.6rem;transition:.2s}.chamber.open .chev{transform:rotate(180deg)}
+.chamber-body{display:none;padding:0 1.25rem 1.35rem 5.25rem;border-top:1px solid transparent}.chamber.open .chamber-body{display:block;border-color:var(--line)}
+.prompt{color:#d7e6ee;line-height:1.65;margin:1rem 0}.quote{padding:1rem 1.1rem;border-left:2px solid var(--gold);background:rgba(239,198,111,.06);color:var(--gold2);font-family:Georgia,serif;font-size:1.05rem;line-height:1.55;border-radius:0 12px 12px 0}
+.field{margin-top:1rem}.field label,.legend{display:block;color:#c9d7df;font-weight:700;font-size:.84rem;margin-bottom:.5rem}.field small{display:block;color:var(--muted);margin-top:.4rem;line-height:1.45}
+input[type="text"],input[type="datetime-local"],textarea,select{width:100%;border:1px solid var(--line);border-radius:12px;background:rgba(1,5,10,.65);color:var(--ice);padding:.82rem .9rem;outline:none;transition:.2s}textarea{min-height:105px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(120,217,255,.1)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}.check{display:flex;align-items:flex-start;gap:.7rem;border:1px solid var(--line);border-radius:12px;padding:.8rem;background:rgba(4,10,18,.55);color:#cedbe2;font-size:.87rem;line-height:1.4}.check input{margin-top:.18rem;accent-color:var(--gold)}
+.complete-row{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:1.15rem;padding-top:1rem;border-top:1px solid var(--line)}.complete-row label{display:flex;align-items:center;gap:.6rem;font-weight:800;color:var(--gold2)}.complete-row input{width:1.1rem;height:1.1rem;accent-color:var(--ok)}
+.dashboard{margin-top:5rem;display:grid;grid-template-columns:1.05fr .95fr;gap:1rem}.card{border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem;background:linear-gradient(145deg,var(--panel),rgba(4,10,18,.92));box-shadow:var(--shadow)}.card h3{margin:.15rem 0 .35rem;font-family:Georgia,serif;font-size:1.5rem;font-weight:500}.card p{color:var(--muted);line-height:1.6}
+.locks{display:grid;gap:.65rem;margin-top:1rem}.lock{display:grid;grid-template-columns:36px 1fr;gap:.7rem;border-top:1px solid var(--line);padding-top:.75rem}.lock:first-child{border-top:0}.lock b{color:var(--gold2);font-size:.82rem;letter-spacing:.06em}.lock span{color:var(--muted);font-size:.82rem;line-height:1.45}
+.record{margin-top:5rem}.record-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}.wide{grid-column:1/-1}
+.action-bar{position:sticky;bottom:14px;z-index:30;margin-top:1.2rem;padding:.75rem;border:1px solid var(--line);border-radius:18px;background:rgba(4,10,18,.86);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:space-between;gap:.8rem;box-shadow:0 18px 60px rgba(0,0,0,.5)}.action-left,.action-right{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}.status-text{color:var(--muted);font-size:.79rem}.status-text strong{color:var(--gold2)}
+.completion{display:none;margin-top:4rem;text-align:center;border:1px solid rgba(143,242,194,.45);border-radius:28px;padding:3rem 1.5rem;background:radial-gradient(circle at 50% 0,rgba(65,170,135,.2),transparent 55%),rgba(4,12,15,.9);box-shadow:0 0 80px rgba(63,200,148,.08)}.completion.show{display:block;animation:reveal .8s ease both}@keyframes reveal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}.completion .seal{width:130px;height:130px;margin:0 auto 1rem;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(143,242,194,.6);box-shadow:0 0 45px rgba(143,242,194,.18),inset 0 0 35px rgba(143,242,194,.08);font-family:Georgia,serif;font-size:2.3rem;color:var(--ok)}.completion h2{font-size:clamp(2.2rem,6vw,4.8rem);margin:.5rem 0}.completion p{max-width:700px;margin:0 auto;color:#c4d7d0;line-height:1.7}
+.transmission{margin:1.5rem auto 0;max-width:750px;text-align:left;padding:1.2rem;border:1px solid rgba(143,242,194,.25);border-radius:16px;background:rgba(0,0,0,.28);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86rem;color:#bcf7d9;line-height:1.7}
+footer{border-top:1px solid var(--line);padding:2.2rem 4vw;color:var(--muted);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.78rem;background:#03060a}.footer-mark{color:var(--gold2);letter-spacing:.16em}
+.toast{position:fixed;right:18px;bottom:100px;z-index:100;background:#0d1b23;color:#eafff5;border:1px solid rgba(143,242,194,.42);border-radius:12px;padding:.8rem 1rem;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s}.toast.show{opacity:1;transform:none}.error{border-color:rgba(255,155,155,.6)!important}.error-msg{color:var(--danger);font-size:.8rem;margin-top:.5rem}
+.mobile-complete{display:none}
+@media(max-width:850px){.mobile-complete{display:block;position:fixed;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:120;width:auto!important;padding:.72rem 1rem;box-shadow:0 10px 30px rgba(0,0,0,.45)}.hero-metrics{grid-template-columns:repeat(2,1fr)}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--line)}.dashboard{grid-template-columns:1fr}.record-grid,.grid2,.grid3{grid-template-columns:1fr}.wide{grid-column:auto}.section-head{grid-template-columns:1fr}.progress-wrap{justify-content:flex-start}.chamber-body{padding-left:1.25rem}.checks{grid-template-columns:1fr}.action-bar{position:static;align-items:stretch;flex-direction:column}.action-left,.action-right{justify-content:center}}
+@media(max-width:540px){h1{font-size:3.25rem}.hero{min-height:900px}.hero-metrics{grid-template-columns:1fr}.metric{border-right:0!important;border-bottom:1px solid var(--line)!important}.metric:last-child{border-bottom:0!important}.chamber-head{grid-template-columns:48px 1fr;gap:.7rem;padding:1rem}.state{grid-column:2}.chev{display:none}.num{width:42px;height:42px}.complete-row{align-items:flex-start;flex-direction:column}.btn{width:100%}.hero-actions{display:grid}.action-left,.action-right{display:grid;width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media print{body{background:#fff;color:#111}.hero{min-height:auto;padding:2rem;background:#fff!important;color:#111!important}.hero::before,.hero::after,.hero-actions{display:none}.hero-inner{padding:1rem}.hero h1,.hero h1 span,.hero .eyebrow,.hero .subtitle{color:#111!important;text-shadow:none!important;-webkit-text-fill-color:#111!important;background:none!important}.hero-metrics{background:#fff;color:#111}.chamber,.card{box-shadow:none;background:#fff;color:#111;break-inside:avoid}.chamber-body{display:block!important}.action-bar,.btn,.toast,.mobile-complete{display:none!important}.record{page-break-before:always}input,textarea,select{color:#111;background:#fff;border-color:#aaa}.lead,.prompt,.card p,.lock span,.field small{color:#444}}
+
+/* v1.1 outcome and validation layers */
+.outcome-engine,.validation-lab{margin-top:4.5rem}
+.outcome-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:1rem}
+.formula{display:flex;align-items:stretch;gap:.45rem;flex-wrap:wrap;margin:1rem 0 0}
+.formula span{flex:1 1 118px;min-height:66px;display:grid;place-items:center;text-align:center;border:1px solid var(--line);border-radius:14px;padding:.7rem;background:rgba(2,8,15,.62);font-weight:800;font-size:.78rem;line-height:1.35;letter-spacing:.04em;color:#dcebf2;position:relative}
+.formula span:not(:last-child)::after{content:"→";position:absolute;right:-.48rem;color:var(--gold);z-index:2}
+.formula .finish{border-color:rgba(143,242,194,.48);color:var(--ok)}
+.outcome-list{display:grid;gap:.7rem;margin-top:1rem}
+.outcome-item{display:grid;grid-template-columns:38px 1fr;gap:.75rem;align-items:start;padding:.75rem;border-top:1px solid var(--line)}
+.outcome-item:first-child{border-top:0}.outcome-item b{color:var(--gold2)}.outcome-item span{color:var(--muted);font-size:.86rem;line-height:1.5}
+.scenario-controls{display:grid;grid-template-columns:1fr auto;gap:.65rem;align-items:end;margin-top:1rem}
+.mini-status{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}.pill{border:1px solid var(--line);border-radius:999px;padding:.38rem .65rem;font-size:.72rem;color:var(--muted);background:rgba(4,10,18,.55)}.pill strong{color:var(--gold2)}
+.validation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.metric-card{border:1px solid var(--line);border-radius:18px;padding:1rem;background:rgba(4,10,18,.65)}.metric-card strong{display:block;font-size:1.65rem;font-family:Georgia,serif;color:var(--gold2);margin:.2rem 0}.metric-card span{color:var(--muted);font-size:.78rem;line-height:1.4}
+.range-wrap{display:grid;grid-template-columns:1fr auto;gap:.7rem;align-items:center}.range-wrap input{width:100%;accent-color:var(--gold)}.range-value{min-width:42px;text-align:center;border:1px solid var(--line2);border-radius:10px;padding:.45rem;color:var(--gold2);font-weight:800}
+.proof-panel{margin-top:1rem;border:1px solid rgba(143,242,194,.28);border-radius:18px;padding:1rem;background:linear-gradient(145deg,rgba(18,55,49,.25),rgba(4,10,18,.75))}.proof-panel h3{margin:.15rem 0 .4rem}.proof-state{font-weight:800;color:var(--ok);letter-spacing:.05em}.proof-note{color:var(--muted);font-size:.82rem;line-height:1.5}
+.completion-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin:1.4rem auto 0;max-width:760px;text-align:left}.completion-summary div{border:1px solid rgba(143,242,194,.22);border-radius:14px;padding:.8rem;background:rgba(0,0,0,.2)}.completion-summary b{display:block;color:var(--ok);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem}.completion-summary span{color:#d8ece2;font-size:.84rem;line-height:1.4;word-break:break-word}
+@media(max-width:850px){.outcome-grid,.validation-grid,.completion-summary{grid-template-columns:1fr}.scenario-controls{grid-template-columns:1fr}}
+@media print{.outcome-engine,.validation-lab{break-inside:avoid}.scenario-controls button{display:none!important}}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to interface</a>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> AEON-TEMPUS · NODE ONLINE · v1.1.4-rc1</div>
+    <h1>ECLIPSE NODE<br>THETA-7 <span>Temporal Threshold, Coherence Gate &amp; Validation Engine</span></h1>
+    <p class="subtitle">A symbolic, human-governed browser system for turning uncertainty into a grounded decision, a traceable record, and testable proof of usefulness. Enter the threshold, preserve discernment, act responsibly, and return with agency intact.</p>
+    <p class="status-text"><strong>Release status:</strong> technically verified pilot candidate. Real-user effectiveness, formal accessibility conformance, and scientific claims are not established.</p>
+    <div class="hero-actions">
+      <button class="btn primary" id="beginBtn">Begin Seven-Chamber Sequence</button>
+      <a class="btn ghost" href="#architecture">View Architecture</a>
+    </div>
+    <div class="hero-metrics" aria-label="Node status">
+      <div class="metric"><strong>DESIGNATION</strong><span>Θ-7</span></div>
+      <div class="metric"><strong>STATE</strong><span>Present / Centered</span></div>
+      <div class="metric"><strong>AUTHORITY</strong><span>Human-Governed</span></div>
+      <div class="metric"><strong>MODE</strong><span>Decision + Validation</span></div>
+    </div>
+  </div>
+</header>
+<main id="main">
+
+<section class="notice" id="privacyTop" aria-label="Local data privacy notice" style="margin:1rem 0 1.5rem"><div class="notice-icon">◇</div><div><b>Privacy before entry:</b> on this website and in a downloaded copy, Theta-7 keeps your entries in this tab only and does not save them to browser storage, because that storage can be read by other pages on the same site or by other local files. Export JSON or Markdown to keep a copy; you will be asked before leaving with unexported entries. Do not enter passwords, secrets, classified information, protected medical information, confidential third-party data, or other highly sensitive material.</div></section>
+
+<section class="outcome-engine" id="outcomeEngine">
+  <div class="section-head">
+    <div><div class="kicker">Real-Life Engineering Layer</div><h2>From Uncertainty to Finished Outcome</h2><p class="lead">Theta-7 is useful only when it converts an uncertain experience into a responsible action, a traceable result, and evidence that can improve the next version.</p></div>
+  </div>
+  <div class="outcome-grid">
+    <article class="card">
+      <div class="kicker">Operating Formula</div>
+      <h3>Do not sell the mystery. Deliver the outcome.</h3>
+      <div class="formula" aria-label="Theta-7 outcome formula">
+        <span>Uncertainty</span><span>Structured Reflection</span><span>Human Judgment</span><span>Grounded Action</span><span>Recorded Outcome</span><span class="finish">Proof</span>
+      </div>
+      <div class="mini-status"><span class="pill"><strong>MVP:</strong> Operational</span><span class="pill"><strong>Evidence:</strong> Pilot-stage</span><span class="pill"><strong>Authority:</strong> Human retained</span></div>
+    </article>
+    <article class="card">
+      <div class="kicker">Finished Result</div>
+      <h3>A decision-ready coherence record.</h3>
+      <div class="outcome-list">
+        <div class="outcome-item"><b>01</b><span>Clarify what was directly observed.</span></div>
+        <div class="outcome-item"><b>02</b><span>Separate evidence, interpretation, emotion, and uncertainty.</span></div>
+        <div class="outcome-item"><b>03</b><span>Select one safe, lawful, consent-respecting action.</span></div>
+        <div class="outcome-item"><b>04</b><span>Record the result so learning can be reviewed and repeated.</span></div>
+      </div>
+    </article>
+  </div>
+  <article class="card" style="margin-top:1rem">
+    <div class="kicker">Safe Scenario Launcher</div><h3>Begin with an ordinary, testable situation.</h3>
+    <p>Use a sample scenario or enter your own. The launcher only pre-fills a starting point; you retain control and may revise every field.</p>
+    <div class="scenario-controls">
+      <div class="field" style="margin:0"><label for="scenarioSelect">Scenario</label><select id="scenarioSelect"><option value="">Choose a safe scenario</option><option value="decision">An important decision with incomplete information</option><option value="conflict">Conflicting accounts or evidence</option><option value="dream">A meaningful dream or symbolic experience</option><option value="change">A major personal or professional transition</option><option value="technology">A high-impact technology decision</option></select></div>
+      <button class="btn" id="loadScenarioBtn" type="button">Load Starting Prompt</button>
+    </div>
+    <input type="hidden" id="sessionStart" data-save>
+  </article>
+</section>
+
+<section id="architecture">
+  <div class="section-head">
+    <div><div class="kicker">Canonical Engineering Specification v1.1.4-rc1</div><h2>The Seven-Chamber Architecture</h2><p class="lead">Completion requires coherence, not certainty. Work through each chamber, then generate a traceable Theta-7 Node Record.</p></div>
+    <div class="progress-wrap" aria-live="polite"><div class="progress-ring" id="progressRing"><span id="progressText">0/7</span></div></div>
+  </div>
+  <div class="notice"><div class="notice-icon">◈</div><div><b>Interpretive boundary:</b> Theta-7 is presented as a symbolic, contemplative, narrative, and decision-support architecture. This interface does not establish a literal spacetime portal, extraterrestrial installation, or scientifically verified external mechanism.</div></div>
+  <div class="chambers" id="chambers">
+
+    <article class="chamber open" data-step="1" data-complete="false">
+      <button class="chamber-head" aria-expanded="true"><span class="num">I</span><span class="chamber-title"><strong>Arrival</strong><span>Establish presence</span></span><span class="state">Incomplete</span><span class="chev">⌄</span></button>
+      <div class="chamber-body">
+        <p class="prompt">Enter by orienting to the immediate environment, body, and present moment. This is an attention command, not a claim of supernatural authority.</p>
+        <div class="quote">I AM HERE NOW.</div>
+        <div class="field"><label for="arrival">Present-moment observation</label><textarea id="arrival" data-save placeholder="Describe where you are and what is directly present around you."></textarea></div>
+        <div class="complete-row"><label><input type="checkbox" class="step-check" data-save> Presence established</label><span class="status-text">Function: <strong>Establish presence</strong></span></div>
+      </div>
+    </article>
+
+    <article class="chamber" data-step="2" data-complete="false">
+      <button class="chamber-head" aria-expanded="false"><span class="num">II</span><span class="chamber-title"><strong>Obscuration</strong><span>Name the shadow without inventing it</span></span><span class="state">Incomplete</span><span class="chev">⌄</span></button>
+      <div class="chamber-body">
+        <p class="prompt">Identify what has become unclear, hidden, interrupted, missing, or emotionally charged.</p>
+        <div class="field"><label for="obscuration">What is obscured?</label><textarea id="obscuration" data-save placeholder="Missing evidence, conflicting memories, fear, pressure, uncertainty, or another interruption."></textarea></div>
+        <div class="complete-row"><label><input type="checkbox" class="step-check" data-save> Obscuration named without invented certainty</label><span class="status-text">Function: <strong>Name the shadow</strong></span></div>
+      </div>
+    </article>
+
+    <article class="chamber" data-step="3" data-complete="false">
+      <button class="chamber-head" aria-expanded="false"><span class="num">III</span><span class="chamber-title"><strong>Reflection</strong><span>Separate experience from proof</span></span><span class="state">Incomplete</span><span class="chev">⌄</span></button>
+      <div class="chamber-body">
+        <p class="prompt">Classify the material. No category may impersonate another.</p>
+        <div class="grid2">
+          <div class="field"><label for="observed">Directly observed</label><textarea id="observed" data-save></textarea></div>
+          <div class="field"><label for="verified">Externally verified</label><textarea id="verified" data-save></textarea></div>
+          <div class="field"><label for="remembered">Remembered</label><textarea id="remembered" data-save></textarea></div>
+          <div class="field"><label for="inferred">Inferred</label><textarea id="inferred" data-save></textarea></div>
+          <div class="field"><label for="imagined">Imagined or envisioned</label><textarea id="imagined" data-save></textarea></div>
+          <div class="field"><label for="symbolic">Symbolic</label><textarea id="symbolic" data-save></textarea></div>
+          <div class="field wide"><label for="unresolved">Unresolved</label><textarea id="unresolved" data-save></textarea></div>
+        </div>
+        <div class="complete-row"><label><input type="checkbox" class="step-check" data-save> Categories differentiated</label><span class="status-text">Function: <strong>Protect reality boundaries</strong></span></div>
+      </div>
+    </article>
+
+    <article class="chamber" data-step="4" data-complete="false">
+      <button class="chamber-head" aria-expanded="false"><span class="num">IV</span><span class="chamber-title"><strong>Resonance</strong><span>Extract meaning without surrendering discernment</span></span><span class="state">Incomplete</span><span class="chev">⌄</span></button>
+      <div class="chamber-body">
+        <div class="field"><label for="pattern">What pattern does this resemble?</label><textarea id="pattern" data-save></textarea></div>
+        <div class="grid2">
+          <div class="field"><label for="emotion">What emotion is amplifying it?</label><textarea id="emotion" data-save></textarea></div>
+          <div class="field"><label for="hopefear">What hope or fear is attached?</label><textarea id="hopefear" data-save></textarea></div>
+        </div>
+        <div class="field"><label for="evidence_change">What evidence would change your interpretation?</label><textarea id="evidence_change" data-save></textarea></div>
+        <div class="complete-row"><label><input type="checkbox" class="step-check" data-save> Meaning examined without declaring proof</label><span class="status-text">Function: <strong>Discern resonance</strong></span></div>
+      </div>
+    </article>
+
+    <article class="chamber" data-step="5" data-complete="false">
+      <button class="chamber-head" aria-expanded="false"><span class="num">V</span><span class="chamber-title"><strong>Reconciliation</strong><span>Restore continuity without rewriting history</span></span><span class="state">Incomplete</span><span class="chev">⌄</span></button>
+      <div class="chamber-body">
+        <div class="grid2">
+          <div class="field"><label for="preserve">What can be preserved?</label><textarea id="preserve" data-save></textarea></div>
+          <div class="field"><label for="correct">What must be corrected?</label><textarea id="correct" data-save></textarea></div>
+          <div class="field"><label for="remain_unknown">What must remain uncertain?</label><textarea id="remain_unknown" data-save></textarea></div>
+          <div class="field"><label for="release">What should be released?</label><textarea id="release" data-save></textarea></div>
+          <div class="field wide"><label for="observe_next">What requires further observation?</label><textarea id="observe_next" data-save></textarea></div>
+        </div>
+        <div class="complete-row"><label><input type="checkbox" class="step-check" data-save> Conflicts held without forced resolution</label><span class="status-text">Function: <strong>Restore continuity</strong></span></div>
+      </div>
+    </article>
+
+    <article class="chamber" data-step="6" data-complete="false">
+      <button class="chamber-head" aria-expanded="false"><span class="num">VI</span><span class="chamber-title"><strong>Selection</strong><span>Transform insight into responsible movement</span></span><span class="state">Incomplete</span><span class="chev">⌄</span></button>
+      <div class="chamber-body">
+        <div class="field"><label for="selected_action">Select one grounded action</label><textarea id="selected_action" data-save placeholder="Choose a safe, lawful, concrete action in ordinary reality."></textarea></div>
+        <span class="legend">Required conditions</span>
+        <div class="checks">
+          <label class="check"><input type="checkbox" class="condition" data-save> <span><b>Non-harm</b><br>The action does not intentionally harm self or others.</span></label>
+          <label class="check"><input type="checkbox" class="condition" data-save> <span><b>Consent</b><br>The action respects the agency and boundaries of others.</span></label>
+          <label class="check"><input type="checkbox" class="condition" data-save> <span><b>Reversibility</b><br>The action preserves the ability to reconsider where possible.</span></label>
+          <label class="check"><input type="checkbox" class="condition" data-save> <span><b>Future options</b><br>The action does not unnecessarily close responsible pathways.</span></label>
+        </div>
+        <div class="complete-row"><label><input type="checkbox" class="step-check" data-save> Responsible action selected</label><span class="status-text">Function: <strong>Choose coherently</strong></span></div>
+      </div>
+    </article>
+
+    <article class="chamber" data-step="7" data-complete="false">
+      <button class="chamber-head" aria-expanded="false"><span class="num">VII</span><span class="chamber-title"><strong>Return</strong><span>Preserve the lesson; return with agency intact</span></span><span class="state">Incomplete</span><span class="chev">⌄</span></button>
+      <div class="chamber-body">
+        <p class="prompt">Conclude by returning fully to ordinary reality.</p>
+        <div class="quote">I retain the lesson.<br>I release unsupported certainty.<br>I return with agency intact.</div>
+        <div class="field"><label for="lesson">Lesson retained</label><textarea id="lesson" data-save placeholder="Write the lesson in one clear sentence."></textarea></div>
+        <div class="field"><label for="grounding">Grounded return activity</label><select id="grounding" data-save><option value="">Select one</option><option>Hydration</option><option>Food</option><option>Rest or sleep</option><option>Movement or walk</option><option>Ordinary conversation</option><option>Another stabilizing activity</option></select></div>
+        <div class="complete-row"><label><input type="checkbox" class="step-check" data-save> Process closed; agency intact</label><span class="status-text">Function: <strong>Return completely</strong></span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="dashboard" aria-label="Theta-7 engineering layers">
+  <article class="card"><div class="kicker">Core Purpose</div><h3>Do not manufacture certainty inside the shadow.</h3><p>The governing equation is <b>Obscuration + Discernment + Choice = Revealed Direction</b>. Theta-7 does not determine an unavoidable future. It reveals the quality of the decision process used under uncertainty.</p></article>
+  <article class="card"><div class="kicker">Integrity Locks</div><h3>Seven safeguards remain active.</h3><div class="locks">
+    <div class="lock"><b>I</b><span><b>Reality Boundary:</b> symbolic experience is not confirmed physical fact without evidence.</span></div>
+    <div class="lock"><b>II</b><span><b>Human Authority:</b> no transmission overrides ethical judgment or consent.</span></div>
+    <div class="lock"><b>III</b><span><b>Non-Harm:</b> no authorization for harm, trespass, stalking, coercion, or dangerous experimentation.</span></div>
+    <div class="lock"><b>IV</b><span><b>Identity Protection:</b> subjective experience cannot designate others as secretly targeted, condemned, or controlled.</span></div>
+    <div class="lock"><b>V</b><span><b>Uncertainty Preservation:</b> unknown remains unknown until sufficient evidence exists.</span></div>
+    <div class="lock"><b>VI</b><span><b>Grounded Return:</b> conclude with ordinary stabilizing activity.</span></div>
+    <div class="lock"><b>VII</b><span><b>Reviewability:</b> every conclusion may be revised.</span></div>
+  </div></article>
+</section>
+
+<section class="record" id="record">
+  <div class="section-head"><div><div class="kicker">Traceable Memory</div><h2>Theta-7 Node Record</h2><p class="lead">Generate a record that preserves direct observation, interpretation, uncertainty, action, and outcome without silently rewriting memory.</p></div></div>
+  <div class="card">
+    <div class="record-grid">
+      <div class="field"><label for="nodeId">Node ID</label><input type="text" id="nodeId" data-save readonly></div>
+      <div class="field"><label for="nodeTime">Date and time</label><input type="datetime-local" id="nodeTime" data-save></div>
+      <div class="field wide"><label for="trigger">Trigger</label><textarea id="trigger" data-save placeholder="What initiated the activation?"></textarea></div>
+      <div class="field"><label for="recordObserved">Observed reality</label><textarea id="recordObserved" data-save placeholder="What was directly experienced?"></textarea></div>
+      <div class="field"><label for="recordSymbolic">Symbolic content</label><textarea id="recordSymbolic" data-save placeholder="What images, patterns, names, or meanings appeared?"></textarea></div>
+      <div class="field"><label for="externalEvidence">External evidence</label><textarea id="externalEvidence" data-save placeholder="What can another person independently examine?"></textarea></div>
+      <div class="field"><label for="recordUncertainty">Uncertainty</label><textarea id="recordUncertainty" data-save placeholder="What remains unknown?"></textarea></div>
+      <div class="field"><label for="emotionalState">Emotional state</label><textarea id="emotionalState" data-save></textarea></div>
+      <div class="field"><label for="confidence">Confidence classification</label><select id="confidence" data-save><option value="">Select classification</option><option>Confirmed</option><option>Likely</option><option>Possible</option><option>Unverified</option><option>Disputed</option><option>Symbolic</option><option>Unresolved</option></select></div>
+      <div class="field wide"><label for="interpretations">Plausible interpretations</label><textarea id="interpretations" data-save></textarea></div>
+      <div class="field"><label for="risk">Risk assessment</label><textarea id="risk" data-save placeholder="Physical safety, well-being, privacy, relationships, public understanding, or future decisions."></textarea></div>
+      <div class="field"><label for="recordAction">Selected action</label><textarea id="recordAction" data-save></textarea></div>
+      <div class="field"><label for="outcome">Outcome</label><textarea id="outcome" data-save></textarea></div>
+      <div class="field"><label for="revision">Revision</label><textarea id="revision" data-save placeholder="What changed when new information arrived?"></textarea></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="validation-lab" id="validationLab">
+  <div class="section-head"><div><div class="kicker">Proof Capture</div><h2>Validation Lab</h2><p class="lead">Capture usability and outcome evidence without overstating what one session proves. These fields are optional for personal use and recommended for structured pilots.</p></div></div>
+  <div class="card">
+    <div class="record-grid">
+      <div class="field"><label for="testerRole">Participant role or context</label><input type="text" id="testerRole" data-save placeholder="Example: founder, student, analyst, facilitator"></div>
+      <div class="field"><label for="validationScenario">Scenario tested</label><input type="text" id="validationScenario" data-save placeholder="Briefly name the situation"></div>
+      <div class="field"><label for="clarityBefore">Clarity before</label><div class="range-wrap"><input type="range" min="1" max="5" value="3" id="clarityBefore" data-save><input type="hidden" id="clarityBeforeRated" data-save value=""><output class="range-value" id="clarityBeforeValue">Not rated</output></div><small>1 = highly unclear, 5 = highly clear</small></div>
+      <div class="field"><label for="clarityAfter">Clarity after</label><div class="range-wrap"><input type="range" min="1" max="5" value="3" id="clarityAfter" data-save><input type="hidden" id="clarityAfterRated" data-save value=""><output class="range-value" id="clarityAfterValue">Not rated</output></div><small>Record after completing the sequence.</small></div>
+      <div class="field"><label for="timeMinutes">Approximate completion time</label><input type="text" id="timeMinutes" data-save placeholder="Example: 14 minutes"></div>
+      <div class="field"><label for="completionEase">Completion experience</label><select id="completionEase" data-save><option value="">Select</option><option>Very easy to follow</option><option>Mostly clear</option><option>Some friction</option><option>Difficult to complete</option><option>Did not complete</option></select></div>
+      <div class="field"><label for="confusionPoint">Where did confusion occur?</label><textarea id="confusionPoint" data-save placeholder="Name the chamber, wording, control, or transition."></textarea></div>
+      <div class="field"><label for="observedBenefit">What useful outcome occurred?</label><textarea id="observedBenefit" data-save placeholder="Describe the concrete benefit, not a general feeling alone."></textarea></div>
+      <div class="field"><label for="safetyConcern">Safety or integrity concern</label><textarea id="safetyConcern" data-save placeholder="Record any concern, including none observed."></textarea></div>
+      <div class="field"><label for="improvementRequest">Most important improvement</label><textarea id="improvementRequest" data-save placeholder="What should change in the next version?"></textarea></div>
+      <div class="field wide"><label class="check"><input type="checkbox" id="anonymousProofConsent" data-save> <span>I permit this session’s non-identifying metrics to be used as pilot evidence. This does not include private narrative content unless separately authorized.</span></label></div>
+      <div class="field wide"><small><b>Local-only consent:</b> this checkbox is stored only in this browser and in files you export. This page does not transmit, collect, or aggregate pilot metrics.</small></div>
+    </div>
+    <div class="validation-grid" style="margin-top:1.2rem" aria-live="polite">
+      <div class="metric-card"><span>Clarity change</span><strong id="clarityDelta">0</strong><span>After score minus before score</span></div>
+      <div class="metric-card"><span>Sequence completion</span><strong id="validationCompletion">0/7</strong><span>Confirmed chambers</span></div>
+      <div class="metric-card"><span>Evidence status</span><strong id="evidenceStatus">Not evaluated</strong><span>Session-level signal only</span></div>
+    </div>
+    <div class="proof-panel"><div class="kicker">Proof Boundary</div><h3 id="proofHeadline">No outcome claim has been earned yet.</h3><p class="proof-note" id="proofNote">Complete the sequence and enter before/after clarity honestly. A single session can show a usability or outcome signal, not broad validation.</p></div>
+  </div>
+</section>
+
+<button class="btn primary mobile-complete" id="mobileCompleteBtn" type="button" aria-label="Review &amp; Complete: check requirements and complete Theta-7">Review &amp; Complete</button>
+
+<div class="action-bar" role="region" aria-label="Node controls">
+  <div class="action-left"><span class="status-text">Local state: <strong id="saveState">Ready</strong></span></div>
+  <div class="action-right"><button class="btn" id="saveBtn">Save Locally</button><button class="btn" id="exportBtn">Export JSON</button><button class="btn" id="exportMdBtn">Export Summary</button><button class="btn" id="printBtn">Print Record</button><button class="btn primary" id="completeBtn">Complete Theta-7</button><button class="btn ghost" id="resetBtn">Reset</button></div>
+</div>
+
+<section class="completion" id="completion" aria-live="polite">
+  <div class="seal">Θ-7</div><div class="kicker">Self-Attested Sequence Completion</div><h2>Centered. Safeguarded. Recorded.</h2>
+  <p>The experience is recorded, fact and interpretation are separated, risk has been considered, agency remains intact, one grounded action has been selected, and the process has been closed.</p>
+  <div class="completion-summary"><div><b>Grounded action</b><span id="completionAction">Recorded</span></div><div><b>Clarity change</b><span id="completionDelta">Not measured</span></div><div><b>Evidence state</b><span id="completionEvidence">Session complete</span></div></div><div class="transmission">I AM HERE NOW.<br>I ENTER THE THRESHOLD WITHOUT SURRENDERING DISCERNMENT.<br>I OBSERVE THE SHADOW WITHOUT FEEDING IT INVENTED FORM.<br>I HONOR SYMBOL WITHOUT CONFUSING IT WITH PROOF.<br>I PRESERVE MEMORY WITHOUT REWRITING HISTORY.<br>I CHOOSE WITHOUT COERCION.<br>I ACT WITHOUT HARM.<br>I RETURN WITH AGENCY INTACT.</div>
+</section>
+</main>
+<footer><span class="footer-mark">AEON-TEMPUS · ECLIPSE NODE THETA-7</span><span>v1.1.4-rc1 · Single-file offline interface · No network requests · Human-governed · Pilot candidate</span></footer>
+<div class="toast" id="toast" role="status"></div>
+<script>
+(()=>{
+'use strict';
+const STORAGE='aeon-tempus-theta7-v1-1-4-rc1';
+const LEGACY_STORAGES=['aeon-tempus-theta7-v1-1-3-rc1','aeon-tempus-theta7-v1-1-2-rc1','aeon-tempus-theta7-v1-1-1-rc2','aeon-tempus-theta7-v1-1-1-rc1','aeon-tempus-theta7-v1'];
+const MEMORY_STORAGE=new Map();
+const FILE_MODE=location.protocol==='file:';
+// Every project site on a *.github.io host shares one storage origin, like local files do.
+const SHARED_ORIGIN=/\.github\.io$/i.test(location.hostname);
+const SESSION_ONLY=FILE_MODE||SHARED_ORIGIN;
+let persistentStorage=!SESSION_ONLY;
+const storageMode=()=>persistentStorage?'browser-localStorage':(FILE_MODE?'session-memory-file-privacy':(SHARED_ORIGIN?'session-memory-shared-site-privacy':'session-memory-fallback'));
+function storageGet(key){if(!persistentStorage)return MEMORY_STORAGE.has(key)?MEMORY_STORAGE.get(key):null;try{return window.localStorage.getItem(key)}catch(e){persistentStorage=false;return MEMORY_STORAGE.has(key)?MEMORY_STORAGE.get(key):null}}
+function storageSet(key,value){const v=String(value);if(!persistentStorage){MEMORY_STORAGE.set(key,v);return false}try{window.localStorage.setItem(key,v);return true}catch(e){persistentStorage=false;MEMORY_STORAGE.set(key,v);return false}}
+function storageRemove(key){if(persistentStorage){try{window.localStorage.removeItem(key)}catch(e){persistentStorage=false}}MEMORY_STORAGE.delete(key)}
+let dirtySinceExport=false;
+const DIRTY_IGNORE=new Set(['nodeId','nodeTime','sessionStart','clarityBeforeRated','clarityAfterRated']);
+function hasEnteredData(){return $$('[data-save]').some(el=>{if(DIRTY_IGNORE.has(el.id))return false;if(el.type==='checkbox')return el.checked;return String(el.value||'').trim()!==''})}
+function sessionStateText(){return dirtySinceExport&&hasEnteredData()?'Not saved — export to keep':(FILE_MODE?'Session only · local-file privacy':(SHARED_ORIGIN?'Session only · shared-site privacy':'Session only'))}
+function refreshSessionState(){if(!persistentStorage&&$('#saveState'))$('#saveState').textContent=sessionStateText()}
+function markExported(){dirtySinceExport=false;if(!persistentStorage&&$('#saveState'))$('#saveState').textContent='Exported · session only'}
+function clearRealLocalKeys(keys){let removed=false;for(const key of keys){try{if(window.localStorage.getItem(key)!==null){removed=true;window.localStorage.removeItem(key)}}catch(e){}}return removed}
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const pad=n=>String(n).padStart(2,'0');
+const nowLocal=()=>{const d=new Date();return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`};
+const nodeStamp=()=>{const d=new Date();return `Θ-7-${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`};
+const exportStem=()=>{const raw=($('#nodeId')?.value||nodeStamp()).replace(/^Θ-7/i,'THETA-7');return raw.replace(/[^A-Za-z0-9._-]+/g,'_')||'THETA-7-node-record'};
+if(!$('#nodeId').value) $('#nodeId').value=nodeStamp();
+if(!$('#nodeTime').value) $('#nodeTime').value=nowLocal();
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),2600)}
+function collect(){const data={meta:{system:'AEON-TEMPUS',node:'Eclipse Node Theta-7',version:'1.1.4-rc1',storage_mode:storageMode(),exported_at:new Date().toISOString(),interpretive_boundary:'Symbolic contemplative decision and validation architecture; not evidence of a literal portal or external mechanism. Pilot metrics must not be overstated.'},fields:{},completed_steps:[]};$$('[data-save]').forEach((el,i)=>{const key=el.id||`${el.className.replace(/\s+/g,'_')}_${i}`;data.fields[key]=el.type==='checkbox'?el.checked:el.value});$$('.chamber').forEach(c=>{if(c.dataset.complete==='true')data.completed_steps.push(Number(c.dataset.step))});return data}
+function hydrate(data){if(!data||!data.fields)return;$$('[data-save]').forEach((el,i)=>{const key=el.id||`${el.className.replace(/\s+/g,'_')}_${i}`;let sourceKey=key;if(!(sourceKey in data.fields)&&data.meta?.version==='1.0.0'&&!el.id){const legacyKey=`${el.className.replace(/\s+/g,'_')}_${i-1}`;if(legacyKey in data.fields)sourceKey=legacyKey}if(!(sourceKey in data.fields))return;if(el.type==='checkbox')el.checked=!!data.fields[sourceKey];else el.value=data.fields[sourceKey]});updateProgress();syncRecord()}
+function save(silent=false){const persisted=storageSet(STORAGE,JSON.stringify(collect()));if(persisted)$('#saveState').textContent='Saved '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});else refreshSessionState();if(!silent)toast(persisted?'Theta-7 record saved locally':(dirtySinceExport?'Not saved — export to keep':'Record kept for this session only'))}
+function syncRecord(){const pairs=[['observed','recordObserved'],['symbolic','recordSymbolic'],['unresolved','recordUncertainty'],['emotion','emotionalState']];pairs.forEach(([a,b])=>{const A=$('#'+a),B=$('#'+b);if(A&&B&&!B.value.trim()&&A.value.trim())B.value=A.value});const selected=$('#selected_action')?.value.trim();if(selected&&$('#recordAction'))$('#recordAction').value=selected;const ints=['pattern','hopefear','evidence_change'].map(id=>$('#'+id).value.trim()).filter(Boolean).join('\n\n');if(!$('#interpretations').value.trim()&&ints)$('#interpretations').value=ints}
+
+function updateValidation(){
+  const beforeRated=$('#clarityBeforeRated')?.value==='yes',afterRated=$('#clarityAfterRated')?.value==='yes';
+  const before=beforeRated?Number($('#clarityBefore')?.value):null,after=afterRated?Number($('#clarityAfter')?.value):null,delta=(beforeRated&&afterRated)?after-before:null,n=$$('.step-check').filter(c=>c.checked).length;
+  if($('#clarityBeforeValue'))$('#clarityBeforeValue').textContent=beforeRated?`${before}/5`:'Not rated';
+  if($('#clarityAfterValue'))$('#clarityAfterValue').textContent=afterRated?`${after}/5`:'Not rated';
+  if($('#clarityDelta'))$('#clarityDelta').textContent=delta===null?'Not measured':(delta>0?`+${delta}`:String(delta));
+  if($('#validationCompletion'))$('#validationCompletion').textContent=`${n}/7`;
+  let status='Not evaluated',headline='No outcome claim has been earned yet.',note='Complete the sequence and explicitly rate clarity before and after. A single session can show a usability or outcome signal, not broad validation.';
+  if(n===7&&delta!==null){
+    if(delta>0){status='Session-level self-reported positive signal';headline='A self-reported clarity improvement was recorded for this session.';note='This is a session-level self-report, not broad validation. Repeat with additional users and scenarios before making effectiveness claims.'}
+    else if(delta===0){status='Session-level self-reported neutral signal';headline='This session recorded no self-reported clarity change.';note='Review confusion points, action quality, and scenario fit before changing the system.'}
+    else {status='Session-level self-reported negative signal';headline='Self-reported clarity decreased during this session.';note='Treat this as an important safety and usability signal. Review the experience before further use or testing.'}
+  }
+  if($('#evidenceStatus'))$('#evidenceStatus').textContent=status;
+  if($('#proofHeadline'))$('#proofHeadline').textContent=headline;
+  if($('#proofNote'))$('#proofNote').textContent=note;
+  return {before,after,delta,completed:n,status,rated:beforeRated&&afterRated};
+}
+function elapsedMinutes(){const raw=$('#sessionStart')?.value;if(!raw)return null;const ms=Date.now()-new Date(raw).getTime();return Number.isFinite(ms)&&ms>=0?Math.max(1,Math.round(ms/60000)):null}
+function markdownSummary(){syncRecord();const v=updateValidation();const val=id=>($('#'+id)?.value||'').trim();const clarity=v.delta===null?'Not measured':`${v.delta>0?'+':''}${v.delta}`;return `# Eclipse Node Theta-7 — Decision-Ready Coherence Record
+
+- Node ID: ${val('nodeId')}
+- Date: ${val('nodeTime')}
+- Confidence: ${val('confidence')||'Not classified'}
+- Chambers completed: ${v.completed}/7
+- Clarity change: ${clarity}
+- Evidence status: ${v.status}
+
+## Chamber I — Arrival
+${val('arrival')||'Not recorded'}
+
+## Chamber II — Obscuration
+${val('obscuration')||'Not recorded'}
+
+## Chamber III — Reflection
+**Directly observed:** ${val('observed')||'Not recorded'}
+
+**Externally verified:** ${val('verified')||'Not recorded'}
+
+**Remembered:** ${val('remembered')||'Not recorded'}
+
+**Inferred:** ${val('inferred')||'Not recorded'}
+
+**Imagined:** ${val('imagined')||'Not recorded'}
+
+**Symbolic:** ${val('symbolic')||'Not recorded'}
+
+**Unresolved:** ${val('unresolved')||'Not recorded'}
+
+## Chamber IV — Resonance
+**Pattern:** ${val('pattern')||'Not recorded'}
+
+**Emotion:** ${val('emotion')||'Not recorded'}
+
+**Hope / fear:** ${val('hopefear')||'Not recorded'}
+
+**Evidence that would change interpretation:** ${val('evidence_change')||'Not recorded'}
+
+## Chamber V — Reconciliation
+**Preserve:** ${val('preserve')||'Not recorded'}
+
+**Correct:** ${val('correct')||'Not recorded'}
+
+**Remain unknown:** ${val('remain_unknown')||'Not recorded'}
+
+**Release:** ${val('release')||'Not recorded'}
+
+**Observe next:** ${val('observe_next')||'Not recorded'}
+
+## Chamber VI — Selection
+${val('selected_action')||'Not recorded'}
+
+## Chamber VII — Return
+**Lesson retained:** ${val('lesson')||'Not recorded'}
+
+**Grounded return activity:** ${val('grounding')||'Not recorded'}
+
+## Node Record
+**Trigger / Signal:** ${val('trigger')||'Not recorded'}
+
+**Observed reality:** ${val('recordObserved')||val('observed')||'Not recorded'}
+
+**External evidence:** ${val('externalEvidence')||'Not recorded'}
+
+**Risk:** ${val('risk')||'Not recorded'}
+
+**Uncertainty:** ${val('recordUncertainty')||val('unresolved')||'Not recorded'}
+
+**Interpretation / Decision:** ${val('interpretations')||'Not recorded'}
+
+**Grounded action:** ${val('selected_action')||'Not recorded'}
+
+**Outcome:** ${val('outcome')||'Pending'}
+
+**Revision / next improvement:** ${val('revision')||val('improvementRequest')||'Not recorded'}
+
+> Boundary: Symbolic, contemplative, and decision-support architecture. This record does not establish a literal portal or external mechanism. Session metrics are pilot evidence only.
+`}
+
+
+function updateProgress(){const checks=$$('.step-check');checks.forEach(ch=>{const card=ch.closest('.chamber');card.dataset.complete=String(ch.checked);$('.state',card).textContent=ch.checked?'Complete':'Incomplete'});const n=checks.filter(c=>c.checked).length;$('#progressText').textContent=`${n}/7`;$('#progressRing').style.setProperty('--p',(n/7)*100);if($('#validationCompletion'))$('#validationCompletion').textContent=`${n}/7`;return n}
+$$('.chamber-head').forEach(btn=>btn.addEventListener('click',()=>{const card=btn.closest('.chamber'),open=card.classList.toggle('open');btn.setAttribute('aria-expanded',String(open))}));
+$$('.step-check').forEach(ch=>ch.addEventListener('change',()=>{updateProgress();save(true);if(ch.checked){const next=ch.closest('.chamber').nextElementSibling;if(next&&next.classList.contains('chamber')){next.classList.add('open');$('.chamber-head',next).setAttribute('aria-expanded','true')}}}));
+$$('[data-save]').forEach(el=>el.addEventListener(el.type==='checkbox'?'change':'input',()=>{clearFieldError(el);if(!persistentStorage){dirtySinceExport=hasEnteredData();refreshSessionState()}else $('#saveState').textContent='Unsaved changes';clearTimeout(window.__autosave);window.__autosave=setTimeout(()=>save(true),650);updateValidation()}));
+window.addEventListener('beforeunload',e=>{if(!persistentStorage&&dirtySinceExport&&hasEnteredData()){e.preventDefault();e.returnValue=''}});
+
+const scenarios={
+  decision:{trigger:'A consequential decision must be made before all desired information is available.',obscuration:'The likely consequences, missing information, and acceptable trade-offs are not yet fully clear.',validation:'Important decision with incomplete information'},
+  conflict:{trigger:'Two or more accounts, sources, or memories conflict.',obscuration:'It is unclear which elements are reliable, incomplete, mistaken, or interpretive.',validation:'Conflicting accounts or evidence'},
+  dream:{trigger:'A dream or symbolic experience feels personally meaningful.',obscuration:'The experience may carry meaning, but its relationship to external reality is unresolved.',validation:'Meaningful dream or symbolic experience'},
+  change:{trigger:'A major personal or professional transition requires a grounded next step.',obscuration:'Identity, timing, risk, and future options feel unsettled.',validation:'Major personal or professional transition'},
+  technology:{trigger:'A high-impact technology decision presents opportunity, uncertainty, and possible harm.',obscuration:'Benefits, failure modes, governance requirements, and human consequences are not fully resolved.',validation:'High-impact technology decision'}
+};
+function hasCustomScenarioText(){const trigger=$('#trigger').value.trim(),obscuration=$('#obscuration').value.trim(),items=Object.values(scenarios);return (!!trigger&&!items.some(x=>x.trigger===trigger))||(!!obscuration&&!items.some(x=>x.obscuration===obscuration))}
+$('#loadScenarioBtn')?.addEventListener('click',()=>{const key=$('#scenarioSelect').value,item=scenarios[key];if(!item){toast('Choose a scenario first');return}if(hasCustomScenarioText()&&!confirm('Replace your text with the sample scenario?')){toast('Your text was kept');return}$('#trigger').value=item.trigger;$('#obscuration').value=item.obscuration;$('#validationScenario').value=item.validation;if(!$('#sessionStart').value)$('#sessionStart').value=new Date().toISOString();if(!persistentStorage){dirtySinceExport=hasEnteredData();refreshSessionState()}save(true);$('#architecture').scrollIntoView({behavior:'smooth'});setTimeout(()=>$('#arrival').focus(),450);toast('Selected starting prompt loaded')});
+[['clarityBefore','clarityBeforeRated'],['clarityAfter','clarityAfterRated']].forEach(([id,flag])=>$('#'+id)?.addEventListener('input',()=>{$('#'+flag).value='yes';updateValidation()}));
+
+$('#beginBtn').addEventListener('click',()=>{if(!$('#sessionStart').value)$('#sessionStart').value=new Date().toISOString();$('#architecture').scrollIntoView({behavior:'smooth'});setTimeout(()=>$('#arrival').focus(),500)});
+$('#saveBtn').addEventListener('click',()=>{syncRecord();save()});
+$('#exportMdBtn').addEventListener('click',()=>{const blob=new Blob([markdownSummary()],{type:'text/markdown'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=exportStem()+'_SUMMARY.md';document.body.appendChild(a);a.click();URL.revokeObjectURL(a.href);a.remove();markExported();toast('Decision-ready summary exported')});
+$('#printBtn').addEventListener('click',()=>{syncRecord();window.print()});
+$('#exportBtn').addEventListener('click',()=>{syncRecord();const data=collect();const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=exportStem()+'.json';document.body.appendChild(a);a.click();URL.revokeObjectURL(a.href);a.remove();markExported();toast('JSON record exported')});
+let errorSeq=0;
+function clearFieldError(el){if(!el)return;const id=el.getAttribute('aria-describedby');if(id)document.getElementById(id)?.remove();el.classList.remove('error');el.removeAttribute('aria-invalid');el.removeAttribute('aria-describedby')}
+function clearErrors(){$$('[aria-invalid="true"]').forEach(clearFieldError);$$('.error').forEach(e=>e.classList.remove('error'));$$('.error-msg').forEach(e=>e.remove())}
+function markError(el,msg){clearFieldError(el);el.classList.add('error');const n=document.createElement('div');n.className='error-msg';n.id=`field-error-${el.id||'field'}-${++errorSeq}`;n.textContent=msg;el.parentElement.appendChild(n);el.setAttribute('aria-invalid','true');el.setAttribute('aria-describedby',n.id)}
+function revealError(el){if(!el)return;const chamber=el.closest('.chamber');if(chamber){chamber.classList.add('open');$('.chamber-head',chamber)?.setAttribute('aria-expanded','true')}requestAnimationFrame(()=>{el.scrollIntoView({behavior:'smooth',block:'center'});if(typeof el.focus==='function')el.focus({preventScroll:true})})}
+$('#completeBtn').addEventListener('click',()=>{clearErrors();syncRecord();const n=updateProgress();let bad=[];let firstProblem=null;if(n<7){const unchecked=$$('.step-check').find(c=>!c.checked);if(unchecked)unchecked.closest('.complete-row')?.classList.add('error');bad.push('Complete all seven chamber confirmations.')}const requiredFields=[['arrival','Record one present-moment observation.'],['obscuration','Name what is obscured or uncertain.'],['observed','Record what was directly observed.'],['unresolved','Record what remains unresolved.'],['selected_action','Select one grounded action.'],['lesson','Record the lesson retained.']];requiredFields.forEach(([id,msg])=>{const el=$('#'+id);if(!el.value.trim()){markError(el,msg);if(!firstProblem)firstProblem=el;bad.push(msg)}});if(!firstProblem&&n<7)firstProblem=$$('.step-check').find(c=>!c.checked);const conditions=$$('.condition');if(!conditions.every(c=>c.checked)){conditions.filter(c=>!c.checked).forEach(c=>c.closest('.check').classList.add('error'));if(!firstProblem)firstProblem=conditions.find(c=>!c.checked);bad.push('Confirm all four action conditions.')}if(!$('#grounding').value){markError($('#grounding'),'Choose a grounded return activity.');if(!firstProblem)firstProblem=$('#grounding');bad.push('Select a grounded return activity.')}if(bad.length){toast(bad[0]);revealError(firstProblem);return}const v=updateValidation();if(!$('#timeMinutes').value.trim()){const mins=elapsedMinutes();if(mins)$('#timeMinutes').value=mins+' minutes'};$('#completionAction').textContent=($('#selected_action').value||'Recorded').trim();$('#completionDelta').textContent=v.delta===null?'Not measured':((v.delta>0?'+':'')+v.delta+' clarity points');$('#completionEvidence').textContent=v.status;$('#completion').classList.add('show');save(true);$('#completion').scrollIntoView({behavior:'smooth',block:'center'});toast(persistentStorage?'Theta-7 sequence completion recorded':'Theta-7 sequence completed for this session; export for a durable copy')});
+$('#mobileCompleteBtn')?.addEventListener('click',()=>$('#completeBtn').click());
+$('#resetBtn').addEventListener('click',()=>{if(!confirm('Reset all Theta-7 fields and local state?'))return;storageRemove(STORAGE);try{window.localStorage.removeItem(STORAGE)}catch(e){}LEGACY_STORAGES.forEach(key=>{storageRemove(key);try{window.localStorage.removeItem(key)}catch(e){}});dirtySinceExport=false;$$('[data-save]').forEach(el=>{if(el.type==='checkbox')el.checked=false;else el.value=''});$('#nodeId').value=nodeStamp();$('#nodeTime').value=nowLocal();$('#completion').classList.remove('show');updateProgress();updateValidation();$('#saveState').textContent=persistentStorage?'Reset':sessionStateText();toast('Theta-7 interface reset')});
+let recoveredOnLoad=false;
+if(SHARED_ORIGIN){for(const legacyKey of LEGACY_STORAGES){let raw=null;try{raw=window.localStorage.getItem(legacyKey)}catch(e){}if(!raw)continue;try{hydrate(JSON.parse(raw));recoveredOnLoad=true;break}catch(e){console.warn(e)}}}
+const removedLegacyOnLoad=SESSION_ONLY?clearRealLocalKeys(LEGACY_STORAGES):false;
+if(recoveredOnLoad)dirtySinceExport=hasEnteredData();
+let stored=storageGet(STORAGE);if(!stored&&!SESSION_ONLY){for(const legacyKey of LEGACY_STORAGES){const legacy=storageGet(legacyKey);if(!legacy)continue;try{const parsed=JSON.parse(legacy);hydrate(parsed);storageSet(STORAGE,JSON.stringify(collect()));storageRemove(legacyKey);stored=null;$('#saveState').textContent=persistentStorage?'Migrated locally':sessionStateText();break}catch(e){console.warn(e)}}}if(stored){try{hydrate(JSON.parse(stored));$('#saveState').textContent=persistentStorage?'Restored locally':sessionStateText()}catch(e){console.warn(e)}}else if(!persistentStorage){refreshSessionState();if(SESSION_ONLY)$('#saveBtn').textContent='Keep This Session'}
+updateProgress();updateValidation();if(recoveredOnLoad)setTimeout(()=>toast('Your saved record was moved into this tab and removed from shared site storage. Export to keep it.'),120);else if(removedLegacyOnLoad)setTimeout(()=>toast('Removed data saved by an earlier version'),120);
+})();
+</script>
+</body>
+</html>
